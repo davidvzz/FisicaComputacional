@@ -11,8 +11,8 @@ def romberg(a, b, k, l):
    Inputs:
       a: limite inferior de integración
       b: limite superior de integración
-      k: 1,2,3, ...
-      l: 1,2,3, ...
+      k: 1,2,3, n
+      l: 1,2,..., k
    Output:
       r: valor de la integral 
    '''
@@ -20,7 +20,7 @@ def romberg(a, b, k, l):
       print('Error, j es mayor a i')
       return 
    if l==0 or k==0:
-      print('Error')
+      print('Error, i y j tienen que ser mayores a cero')
       return
 
    r=np.zeros((k,l)) #array donde se guardan los valores de rij
@@ -40,7 +40,7 @@ def romberg(a, b, k, l):
 
          else: #Calcula Rij, i>=2 j>2
             r[i-1,j-1] = ( 4**(j-1)*r[i-1,j-2]-r[i-2,j-2] )/( 4**(j-1)-1 )
-            
+
    return r[k-1,l-1]
 
 print(romberg(1,3,3,3))
