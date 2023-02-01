@@ -19,14 +19,19 @@ def romberg(a, b, k, l):
    if l>k:
       print('Error, j es mayor a i')
       return 
-   if l==0 or k==0:
+
+   if l<=0 or k<=0:
       print('Error, i y j tienen que ser mayores a cero')
       return
 
    r=np.zeros((k,l)) #array donde se guardan los valores de rij
    sum=0
-   for i in range(1,k+1):
-      for j in range(1,l+1):
+   for j in range(1,l+1):  #ciclo para movernos entre columnas
+      for i in range(1,k+1): #ciclo para movernos entre filas
+
+         if (i < j): #solamente calculamos los elementos de la matriz triangular
+            continue
+
          if ( i==1 and j==1 ):   #Calcula R11
             h = (b-a)/i
             r[0,0] = h/2 *( f(a) + f(b) )
@@ -42,5 +47,6 @@ def romberg(a, b, k, l):
             r[i-1,j-1] = ( 4**(j-1)*r[i-1,j-2]-r[i-2,j-2] )/( 4**(j-1)-1 )
 
    return r[k-1,l-1]
+
 
 print(romberg(1,3,3,3))

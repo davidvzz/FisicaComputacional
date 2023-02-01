@@ -25,19 +25,23 @@ real function romberg(a, b, i, j)
    integer  :: i, j, k, l, m
    real  :: r(i,j)
 
+
    if (j>i) then
       write(*,*) 'Error, j es mayor a i'
       return 
    end if
 
-   if (i==0 .or. j==0) then
+   if (i<=0 .or. j<=0) then
       write(*,*) 'Error, i y j tienen que ser mayores a cero'
       return
    end if
 
    sum=0 !se almacena el valor de la sumatoria
-   do k=1,i
-      do l=1,k
+   do l=1,j !ciclo para movernos entre columnas
+      do k=1,i !ciclo para movernos entre filas
+
+         if ( k<l ) cycle !solamente calculamos los elementos de la matriz triangular
+
          if ( k==1 .and. l==1 ) then   !calcula r11
             h = (b-a)/k
             r(1,1) = h/2 *( f(a) + f(b) )
