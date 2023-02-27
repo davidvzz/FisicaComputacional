@@ -1,7 +1,7 @@
 program main
    implicit none
-   real  :: e,factorial,senh
-   write(*,*) senh(5.0,10)
+   real  :: e,factorial,senh,coship,tanhip
+   write(*,*) tanhip(5.0,10)
 end program main
 
 real function factorial(n)
@@ -31,11 +31,17 @@ real function senh(x,n)
    return
 end function senh
 
-real function cosh(x,n)
+real function coship(x,n)
    real  :: x,factorial
    integer  :: n
-   cosh=0
+   coship=0
    do i=0, n
-      cosh=cosh+x**(2*i)/factorial(2*i)
+      coship=coship+x**(2*i)/factorial(2*i)
    end do
-end function cosh
+end function coship
+
+real function tanhip(x,n)
+   real  :: x,senh,coship
+   integer  :: n
+   tanhip=senh(x,n)/coship(x,n)
+end function tanhip
